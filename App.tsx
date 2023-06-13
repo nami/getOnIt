@@ -12,7 +12,6 @@ import {
   SafeAreaView,
   Text,
   TouchableOpacity,
-  View,
   // ScrollView,
   // StatusBar,
   // StyleSheet,
@@ -80,6 +79,7 @@ function App(): JSX.Element {
 
   // authenticate
   const authenticate = async () => {
+    hasLocalAuth();
     const result = await LocalAuthentication.authenticateAsync();
     setIsAuth(result.success);
   };
@@ -90,8 +90,7 @@ function App(): JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  // if no local auth, send user to setup one in phone settings
-  if (!hasAuth) {
+  const noAuth = () => {
     return (
       <SafeAreaView>
         <Text>Please set up local authentication in your phone settings</Text>
@@ -99,12 +98,25 @@ function App(): JSX.Element {
           onPress={() =>
             Platform.OS === 'ios'
               ? Linking.openURL('App-Prefs:Settings')
-              : Linking.sendIntent('android.settings.SETTINGS')
+              : Linking.sendIntent('android.settings.SECURITY_SETTINGS')
           }>
           <Text>Go to Settings</Text>
         </TouchableOpacity>
+        {/* Need this to recheck if user has changed settings while on app */}
+        <TouchableOpacity
+          onPress={() => {
+            hasLocalAuth();
+            hasAuth ? authenticate() : <></>;
+          }}>
+          <Text>Recheck Auth</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     );
+  };
+
+  // if no local auth, send user to setup one in phone settings
+  if (!hasAuth) {
+    return noAuth();
   }
 
   return (
@@ -139,10 +151,12 @@ function App(): JSX.Element {
       </ScrollView> */}
       {isAuth ? (
         <MainList />
-      ) : (
+      ) : hasAuth ? (
         <TouchableOpacity onPress={authenticate}>
           <Text>Start To-Do-ing</Text>
         </TouchableOpacity>
+      ) : (
+        noAuth()
       )}
     </SafeAreaView>
   );

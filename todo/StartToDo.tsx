@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   startBox: {
+    backgroundColor: 'white',
     marginHorizontal: 16,
     marginVertical: 24,
     paddingTop: 24,

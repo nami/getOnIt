@@ -1,17 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 import CompletedList from './CompletedList';
 import Loading from './Loading';
 import ToDoList from './ToDoList';
 import Input from './Input';
+import {SegmentedButtons, useTheme} from 'react-native-paper';
 
 export interface IListItem {
   id: string;
   value: string;
   active: boolean;
   completed: boolean;
+}
+
+export enum ListStatus {
+  ALL = 'all',
+  TODO = 'todo',
+  COMPLETED = 'completed',
 }
 
 const allListItems: IListItem[] = [
@@ -41,7 +48,14 @@ const allListItems: IListItem[] = [
   },
 ];
 
+const textLogo = require('../images/get-on-it-type.png');
+
 const MainList = () => {
+  const theme = useTheme();
+  // List chosen by user
+  const [chosenListStatus, setChosenListStatus] = useState<ListStatus>(
+    ListStatus.ALL
+  );
   // Full list
   const [list, setList] = useState<IListItem[]>(allListItems);
   // Only list items that are not "deleted"
@@ -127,23 +141,125 @@ const MainList = () => {
     return <Loading />;
   }
 
-  return (
-    <View>
+  const chosenSegmentedButtonStyle = {
+    borderColor: theme.colors.background,
+    backgroundColor: theme.colors.primary,
+  };
+
+  const regularSegmentedButtonStyle = {
+    borderColor: theme.colors.background,
+    backgroundColor: 'white',
+  };
+
+  const showToDoList = () => {
+    return (
       <ToDoList
         toDoList={toDoList}
         updateListItem={updateListItem}
         renderListItemInactive={renderListItemInactive}
         toggleComplete={toggleComplete}
       />
+    );
+  };
+
+  const showCompletedList = () => {
+    return (
       <CompletedList
         completedList={completedList}
         updateListItem={updateListItem}
         renderListItemInactive={renderListItemInactive}
         toggleComplete={toggleComplete}
       />
+    );
+  };
+
+  const renderList = () => {
+    switch (chosenListStatus) {
+      case ListStatus.ALL:
+        return (
+          <>
+            {showToDoList()}
+            {showCompletedList()}
+          </>
+        );
+      case ListStatus.TODO:
+        return showToDoList();
+      case ListStatus.COMPLETED:
+        return showCompletedList();
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.logoContainer}>
+        <Image source={textLogo} style={styles.textLogo} resizeMode="contain" />
+      </View>
+      <View style={styles.segmentedButtonContainer}>
+        <SegmentedButtons
+          value={chosenListStatus}
+          onValueChange={val => setChosenListStatus(val as ListStatus)}
+          buttons={[
+            {
+              value: ListStatus.ALL,
+              label: 'All',
+              icon: 'format-list-checks',
+              checkedColor: 'white',
+              uncheckedColor: '#808080',
+              style:
+                chosenListStatus === ListStatus.ALL
+                  ? chosenSegmentedButtonStyle
+                  : regularSegmentedButtonStyle,
+            },
+            {
+              value: ListStatus.TODO,
+              label: 'To Do',
+              icon: 'checkbox-multiple-blank-outline',
+              checkedColor: 'white',
+              uncheckedColor: '#808080',
+              style:
+                chosenListStatus === ListStatus.TODO
+                  ? chosenSegmentedButtonStyle
+                  : regularSegmentedButtonStyle,
+            },
+            {
+              value: ListStatus.COMPLETED,
+              label: 'Completed',
+              icon: 'checkbox-multiple-outline',
+              checkedColor: 'white',
+              uncheckedColor: '#808080',
+              style:
+                chosenListStatus === ListStatus.COMPLETED
+                  ? chosenSegmentedButtonStyle
+                  : regularSegmentedButtonStyle,
+            },
+          ]}
+        />
+      </View>
+      {renderList()}
       <Input addListItem={addListItem} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  logoContainer: {
+    alignContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '5%',
+  },
+  textLogo: {
+    flex: 1,
+    height: 100,
+    width: 100,
+  },
+  segmentedButtonContainer: {
+    paddingHorizontal: '5%',
+    marginTop: '5%',
+  },
+});
 
 export default MainList;

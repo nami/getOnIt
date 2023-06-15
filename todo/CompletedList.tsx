@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {IListItem} from './MainList';
 import ListItem from './ListItem';
 
@@ -17,8 +17,7 @@ const CompletedList = ({
   toggleComplete,
 }: CompletedListProps) => {
   return (
-    <View>
-      <Text>Completed List</Text>
+    <View style={styles.container}>
       <FlatList
         data={completedList}
         renderItem={({item}) => (
@@ -33,9 +32,15 @@ const CompletedList = ({
         )}
         keyExtractor={item => item.id}
       />
-      <Text>End of Completed List</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: '3%',
+    width: '100%',
+  },
+});
 
 export default CompletedList;

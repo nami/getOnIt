@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import {IListItem} from './MainList';
 import ListItem from './ListItem';
 
@@ -17,8 +17,7 @@ const ToDoList = ({
   toggleComplete,
 }: ToDoListProps) => {
   return (
-    <View>
-      <Text>To Do List</Text>
+    <View style={styles.container}>
       <FlatList
         data={toDoList}
         renderItem={({item}) => (
@@ -33,9 +32,15 @@ const ToDoList = ({
         )}
         keyExtractor={item => item.id}
       />
-      <Text>End of To Do List</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: '3%',
+    width: '100%',
+  },
+});
 
 export default ToDoList;

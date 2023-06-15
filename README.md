@@ -1,7 +1,7 @@
 # Get To It
 
-<img src="https://ibb.co/yFmhZTY>
-
+<img src=""https://i.ibb.co/xqKmBvf/get-on-it-type.png">
+         
 Deployed on Vercel here: https://react-employee-spa.vercel.app/
 
 This project was part of a technical coding challenge for a front end/design position. The challenge was to implement a secured To Do list application with a bare React Native project and Expo local-authentication module. The application must ask for authentication before the user can add, update and delete items on the list.

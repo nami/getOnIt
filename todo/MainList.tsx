@@ -61,31 +61,41 @@ const MainList = () => {
   const [activeList, setActiveList] = useState<IListItem[] | undefined>(
     undefined
   );
-  // Only list items that are completed
-  const [completedList, setCompletedList] = useState<IListItem[] | undefined>(
-    undefined
+  const [chosenList, setChosenList] = useState<IListItem[] | undefined>(
+    activeList
   );
-  // Only list items that are still to-do
-  const [toDoList, setToDoList] = useState<IListItem[] | undefined>(undefined);
 
   // Get list items that are not deleted
+  // Chose to do this so as to keep "deleted" items for possible future recovery
   useEffect(() => {
     const filteredActiveList = [...list]?.filter(listItem => listItem.active);
     setActiveList(filteredActiveList);
   }, [list]);
 
-  // Get list items that are in to-do or completed
+  // Get chosen list based on user chosen status
   useEffect(() => {
-    const filteredCompletedList = activeList
-      ? [...activeList].filter(listItem => listItem.completed)
-      : [];
-    setCompletedList(filteredCompletedList);
+    if (!activeList) {
+      return;
+    }
+    let chosenListItems;
 
-    const filteredTodoList = activeList
-      ? [...activeList].filter(listItem => !listItem.completed)
-      : [];
-    setToDoList(filteredTodoList);
-  }, [activeList]);
+    switch (chosenListStatus) {
+      case ListStatus.ALL:
+        chosenListItems = activeList;
+        break;
+      case ListStatus.TODO:
+        chosenListItems = [...activeList].filter(
+          listItem => !listItem.completed
+        );
+        break;
+      case ListStatus.COMPLETED:
+        chosenListItems = [...activeList].filter(
+          listItem => listItem.completed
+        );
+        break;
+    }
+    setChosenList(chosenListItems);
+  }, [chosenListStatus, activeList]);
 
   // ---CRUD methods---
   // Create
@@ -136,7 +146,7 @@ const MainList = () => {
   };
 
   // Return loading state if any list is undefined
-  if (!completedList || !toDoList || !activeList) {
+  if (!activeList || !chosenList) {
     return <Loading />;
   }
 
@@ -150,49 +160,41 @@ const MainList = () => {
     backgroundColor: 'white',
   };
 
-  const showToDoList = () => {
-    return (
-      <SubList
-        list={toDoList}
-        updateListItem={updateListItem}
-        renderListItemInactive={renderListItemInactive}
-        toggleComplete={toggleComplete}
-      />
-    );
-  };
-
-  const showCompletedList = () => {
-    return (
-      <SubList
-        list={completedList}
-        updateListItem={updateListItem}
-        renderListItemInactive={renderListItemInactive}
-        toggleComplete={toggleComplete}
-      />
-    );
-  };
-
-  const showAllList = () => {
-    return (
-      <SubList
-        list={activeList}
-        updateListItem={updateListItem}
-        renderListItemInactive={renderListItemInactive}
-        toggleComplete={toggleComplete}
-      />
-    );
-  };
-
-  const renderList = () => {
-    switch (chosenListStatus) {
-      case ListStatus.ALL:
-        return showAllList();
-      case ListStatus.TODO:
-        return showToDoList();
-      case ListStatus.COMPLETED:
-        return showCompletedList();
-    }
-  };
+  const segmentedButtonsArray = [
+    {
+      value: ListStatus.ALL,
+      label: 'All',
+      icon: 'format-list-checks',
+      checkedColor: 'white',
+      uncheckedColor: '#808080',
+      style:
+        chosenListStatus === ListStatus.ALL
+          ? chosenSegmentedButtonStyle
+          : regularSegmentedButtonStyle,
+    },
+    {
+      value: ListStatus.TODO,
+      label: 'To Do',
+      icon: 'checkbox-multiple-blank-outline',
+      checkedColor: 'white',
+      uncheckedColor: '#808080',
+      style:
+        chosenListStatus === ListStatus.TODO
+          ? chosenSegmentedButtonStyle
+          : regularSegmentedButtonStyle,
+    },
+    {
+      value: ListStatus.COMPLETED,
+      label: 'Completed',
+      icon: 'checkbox-multiple-outline',
+      checkedColor: 'white',
+      uncheckedColor: '#808080',
+      style:
+        chosenListStatus === ListStatus.COMPLETED
+          ? chosenSegmentedButtonStyle
+          : regularSegmentedButtonStyle,
+    },
+  ];
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -208,44 +210,15 @@ const MainList = () => {
           <SegmentedButtons
             value={chosenListStatus}
             onValueChange={val => setChosenListStatus(val as ListStatus)}
-            buttons={[
-              {
-                value: ListStatus.ALL,
-                label: 'All',
-                icon: 'format-list-checks',
-                checkedColor: 'white',
-                uncheckedColor: '#808080',
-                style:
-                  chosenListStatus === ListStatus.ALL
-                    ? chosenSegmentedButtonStyle
-                    : regularSegmentedButtonStyle,
-              },
-              {
-                value: ListStatus.TODO,
-                label: 'To Do',
-                icon: 'checkbox-multiple-blank-outline',
-                checkedColor: 'white',
-                uncheckedColor: '#808080',
-                style:
-                  chosenListStatus === ListStatus.TODO
-                    ? chosenSegmentedButtonStyle
-                    : regularSegmentedButtonStyle,
-              },
-              {
-                value: ListStatus.COMPLETED,
-                label: 'Completed',
-                icon: 'checkbox-multiple-outline',
-                checkedColor: 'white',
-                uncheckedColor: '#808080',
-                style:
-                  chosenListStatus === ListStatus.COMPLETED
-                    ? chosenSegmentedButtonStyle
-                    : regularSegmentedButtonStyle,
-              },
-            ]}
+            buttons={segmentedButtonsArray}
           />
         </View>
-        {renderList()}
+        <SubList
+          list={chosenList}
+          updateListItem={updateListItem}
+          renderListItemInactive={renderListItemInactive}
+          toggleComplete={toggleComplete}
+        />
       </ScrollView>
       <NewToDoInput addListItem={addListItem} />
     </ScrollView>

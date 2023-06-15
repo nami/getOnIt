@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, Platform, StyleSheet, View} from 'react-native';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 import CompletedList from './CompletedList';
 import Loading from './Loading';
 import ToDoList from './ToDoList';
-import Input from './Input';
 import {SegmentedButtons, useTheme} from 'react-native-paper';
+import NewToDoInput from './NewToDoInput';
 
 export interface IListItem {
   id: string;
@@ -54,7 +54,7 @@ const MainList = () => {
   const theme = useTheme();
   // List chosen by user
   const [chosenListStatus, setChosenListStatus] = useState<ListStatus>(
-    ListStatus.ALL
+    ListStatus.TODO
   );
   // Full list
   const [list, setList] = useState<IListItem[]>(allListItems);
@@ -236,7 +236,7 @@ const MainList = () => {
         />
       </View>
       {renderList()}
-      <Input addListItem={addListItem} />
+      <NewToDoInput addListItem={addListItem} />
     </View>
   );
 };
@@ -249,7 +249,8 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     width: '100%',
-    height: '5%',
+    height: 50,
+    marginTop: Platform.OS === 'ios' ? 0 : 16,
   },
   textLogo: {
     flex: 1,

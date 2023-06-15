@@ -30,6 +30,7 @@ const ListItem = ({
   const theme = useTheme();
   const [updateMode, setUpdateMode] = useState(false);
   const [newText, setNewText] = useState('');
+  const [showWarning, setShowWarning] = useState(false);
 
   const checkbox = () => {
     return (
@@ -49,6 +50,7 @@ const ListItem = ({
         placeholder={value}
         onChangeText={text => setNewText(text)}
         style={styles.textInput}
+        underlineColor={theme.colors.primary}
       />
     ) : (
       <Text
@@ -65,13 +67,25 @@ const ListItem = ({
     const buttonSize = 20;
     return (
       <View style={styles.editDeleteContainer}>
+        {showWarning ? (
+          <Text style={styles.warningText} variant="labelSmall">
+            Please input text...
+          </Text>
+        ) : (
+          <></>
+        )}
         {updateMode ? (
           <IconButton
             icon="pencil-circle-outline"
             iconColor={theme.colors.primary}
             onPress={() => {
+              if (!newText) {
+                setShowWarning(true);
+                return;
+              }
               updateListItem(id, newText);
               setUpdateMode(false);
+              setShowWarning(false);
             }}
             style={styles.iconButton}
             size={buttonSize}
@@ -134,6 +148,10 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 25,
+  },
+  warningText: {
+    color: 'red',
+    height: 16,
   },
 });
 

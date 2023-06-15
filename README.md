@@ -1,6 +1,6 @@
 # Get To It
 
-<img src=""https://i.ibb.co/xqKmBvf/get-on-it-type.png">
+<img src="https://i.ibb.co/xqKmBvf/get-on-it-type.png">
          
 Deployed on Vercel here: https://react-employee-spa.vercel.app/
 

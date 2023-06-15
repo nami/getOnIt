@@ -54,8 +54,8 @@ const NewToDoInput = ({addListItem}: inputProps) => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    position: 'absolute',
-    bottom: Platform.OS === 'ios' ? 0 : 20,
+    paddingBottom: Platform.OS === 'ios' ? 0 : 10,
+    justifyContent: 'space-between',
     width: '98%',
   },
   container: {

@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Image, Platform, StyleSheet, View} from 'react-native';
+import {Image, Platform, ScrollView, StyleSheet, View} from 'react-native';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
-import CompletedList from './CompletedList';
 import Loading from './Loading';
-import ToDoList from './ToDoList';
 import {SegmentedButtons, useTheme} from 'react-native-paper';
 import NewToDoInput from './NewToDoInput';
+import SubList from './SubList';
 
 export interface IListItem {
   id: string;
@@ -153,8 +152,8 @@ const MainList = () => {
 
   const showToDoList = () => {
     return (
-      <ToDoList
-        toDoList={toDoList}
+      <SubList
+        list={toDoList}
         updateListItem={updateListItem}
         renderListItemInactive={renderListItemInactive}
         toggleComplete={toggleComplete}
@@ -164,8 +163,19 @@ const MainList = () => {
 
   const showCompletedList = () => {
     return (
-      <CompletedList
-        completedList={completedList}
+      <SubList
+        list={completedList}
+        updateListItem={updateListItem}
+        renderListItemInactive={renderListItemInactive}
+        toggleComplete={toggleComplete}
+      />
+    );
+  };
+
+  const showAllList = () => {
+    return (
+      <SubList
+        list={activeList}
         updateListItem={updateListItem}
         renderListItemInactive={renderListItemInactive}
         toggleComplete={toggleComplete}
@@ -176,12 +186,7 @@ const MainList = () => {
   const renderList = () => {
     switch (chosenListStatus) {
       case ListStatus.ALL:
-        return (
-          <>
-            {showToDoList()}
-            {showCompletedList()}
-          </>
-        );
+        return showAllList();
       case ListStatus.TODO:
         return showToDoList();
       case ListStatus.COMPLETED:
@@ -190,60 +195,67 @@ const MainList = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image source={textLogo} style={styles.textLogo} resizeMode="contain" />
-      </View>
-      <View style={styles.segmentedButtonContainer}>
-        <SegmentedButtons
-          value={chosenListStatus}
-          onValueChange={val => setChosenListStatus(val as ListStatus)}
-          buttons={[
-            {
-              value: ListStatus.ALL,
-              label: 'All',
-              icon: 'format-list-checks',
-              checkedColor: 'white',
-              uncheckedColor: '#808080',
-              style:
-                chosenListStatus === ListStatus.ALL
-                  ? chosenSegmentedButtonStyle
-                  : regularSegmentedButtonStyle,
-            },
-            {
-              value: ListStatus.TODO,
-              label: 'To Do',
-              icon: 'checkbox-multiple-blank-outline',
-              checkedColor: 'white',
-              uncheckedColor: '#808080',
-              style:
-                chosenListStatus === ListStatus.TODO
-                  ? chosenSegmentedButtonStyle
-                  : regularSegmentedButtonStyle,
-            },
-            {
-              value: ListStatus.COMPLETED,
-              label: 'Completed',
-              icon: 'checkbox-multiple-outline',
-              checkedColor: 'white',
-              uncheckedColor: '#808080',
-              style:
-                chosenListStatus === ListStatus.COMPLETED
-                  ? chosenSegmentedButtonStyle
-                  : regularSegmentedButtonStyle,
-            },
-          ]}
-        />
-      </View>
-      {renderList()}
+    <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView>
+        <View style={styles.logoContainer}>
+          <Image
+            source={textLogo}
+            style={styles.textLogo}
+            resizeMode="contain"
+          />
+        </View>
+        <View style={styles.segmentedButtonContainer}>
+          <SegmentedButtons
+            value={chosenListStatus}
+            onValueChange={val => setChosenListStatus(val as ListStatus)}
+            buttons={[
+              {
+                value: ListStatus.ALL,
+                label: 'All',
+                icon: 'format-list-checks',
+                checkedColor: 'white',
+                uncheckedColor: '#808080',
+                style:
+                  chosenListStatus === ListStatus.ALL
+                    ? chosenSegmentedButtonStyle
+                    : regularSegmentedButtonStyle,
+              },
+              {
+                value: ListStatus.TODO,
+                label: 'To Do',
+                icon: 'checkbox-multiple-blank-outline',
+                checkedColor: 'white',
+                uncheckedColor: '#808080',
+                style:
+                  chosenListStatus === ListStatus.TODO
+                    ? chosenSegmentedButtonStyle
+                    : regularSegmentedButtonStyle,
+              },
+              {
+                value: ListStatus.COMPLETED,
+                label: 'Completed',
+                icon: 'checkbox-multiple-outline',
+                checkedColor: 'white',
+                uncheckedColor: '#808080',
+                style:
+                  chosenListStatus === ListStatus.COMPLETED
+                    ? chosenSegmentedButtonStyle
+                    : regularSegmentedButtonStyle,
+              },
+            ]}
+          />
+        </View>
+        {renderList()}
+      </ScrollView>
       <NewToDoInput addListItem={addListItem} />
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'space-between',
   },
   logoContainer: {
     alignContent: 'center',

@@ -10,11 +10,9 @@
 		00E356F31AD99517003FC87E /* paidyGetToItTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* paidyGetToItTests.m */; };
 		0C80B921A6F3F58F76C31292 /* libPods-paidyGetToIt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-paidyGetToIt.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
-		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		5894B51E3EB886BDB5BB07C7 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EEFCDECCEDE497EBE0E9DD /* ExpoModulesProvider.swift */; };
 		7699B88040F8A987B510C191 /* libPods-paidyGetToIt-paidyGetToItTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-paidyGetToIt-paidyGetToItTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A06CA95B98255DA970847A7A /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D674DFA50FEB7DF28A161253 /* ExpoModulesProvider.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +38,22 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = paidyGetToIt/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-paidyGetToIt-paidyGetToItTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-paidyGetToIt-paidyGetToItTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29EEFCDECCEDE497EBE0E9DD /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-paidyGetToIt/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		3916F7662A39CF0D0064C5B4 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		3916F7672A39CF0D0064C5B4 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		3916F7682A39CF0D0064C5B4 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		3916F7692A39CF0D0064C5B4 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		3916F76A2A39CF0D0064C5B4 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		3916F76B2A39CF0D0064C5B4 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		3916F76C2A39CF0D0064C5B4 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		3916F76D2A39CF0D0064C5B4 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		3916F76E2A39CF0D0064C5B4 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		3916F76F2A39CF0D0064C5B4 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		3916F7702A39CF0D0064C5B4 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		3916F7712A39CF0D0064C5B4 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		3916F7722A39CF0D0064C5B4 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		3916F7732A39CF0D0064C5B4 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		3916F7742A39CF0D0064C5B4 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		3916F7752A39CF0D0064C5B4 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-paidyGetToIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-paidyGetToIt.debug.xcconfig"; path = "Target Support Files/Pods-paidyGetToIt/Pods-paidyGetToIt.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-paidyGetToIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-paidyGetToIt.release.xcconfig"; path = "Target Support Files/Pods-paidyGetToIt/Pods-paidyGetToIt.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-paidyGetToIt-paidyGetToItTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-paidyGetToIt-paidyGetToItTests.debug.xcconfig"; path = "Target Support Files/Pods-paidyGetToIt-paidyGetToItTests/Pods-paidyGetToIt-paidyGetToItTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -90,6 +104,7 @@
 		13B07FAE1A68108700A75B9A /* paidyGetToIt */ = {
 			isa = PBXGroup;
 			children = (
+				3916F7652A39CF0D0064C5B4 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -116,6 +131,30 @@
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-paidyGetToIt-paidyGetToItTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3916F7652A39CF0D0064C5B4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3916F7662A39CF0D0064C5B4 /* Fontisto.ttf */,
+				3916F7672A39CF0D0064C5B4 /* Octicons.ttf */,
+				3916F7682A39CF0D0064C5B4 /* Feather.ttf */,
+				3916F7692A39CF0D0064C5B4 /* Entypo.ttf */,
+				3916F76A2A39CF0D0064C5B4 /* FontAwesome5_Brands.ttf */,
+				3916F76B2A39CF0D0064C5B4 /* MaterialCommunityIcons.ttf */,
+				3916F76C2A39CF0D0064C5B4 /* AntDesign.ttf */,
+				3916F76D2A39CF0D0064C5B4 /* Foundation.ttf */,
+				3916F76E2A39CF0D0064C5B4 /* Ionicons.ttf */,
+				3916F76F2A39CF0D0064C5B4 /* FontAwesome5_Solid.ttf */,
+				3916F7702A39CF0D0064C5B4 /* FontAwesome5_Regular.ttf */,
+				3916F7712A39CF0D0064C5B4 /* FontAwesome.ttf */,
+				3916F7722A39CF0D0064C5B4 /* Zocial.ttf */,
+				3916F7732A39CF0D0064C5B4 /* EvilIcons.ttf */,
+				3916F7742A39CF0D0064C5B4 /* SimpleLineIcons.ttf */,
+				3916F7752A39CF0D0064C5B4 /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 		7FF11A53B2196E166D120841 /* paidyGetToIt */ = {
@@ -210,10 +249,10 @@
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
-				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
 				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				3916F7862A39D9EA0064C5B4 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -268,12 +307,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		13B07F8E1A680F5B00A75B9A /* Resources */ = {
+		3916F7862A39D9EA0064C5B4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

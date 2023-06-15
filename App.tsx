@@ -6,62 +6,15 @@
  */
 
 import React, {useEffect, useState} from 'react';
-// import type {PropsWithChildren} from 'react';
-import {
-  Platform,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  // ScrollView,
-  // StatusBar,
-  // StyleSheet,
-  // Text,
-  useColorScheme,
-  // View,
-} from 'react-native';
-
-import {
-  Colors,
-  // DebugInstructions,
-  // Header,
-  // LearnMoreLinks,
-  // ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import MainList from './todo/MainList';
 import * as LocalAuthentication from 'expo-local-authentication';
-import {Linking} from 'react-native';
-
-// type SectionProps = PropsWithChildren<{
-//   title: string;
-// }>;
-
-// function Section({children, title}: SectionProps): JSX.Element {
-//   const isDarkMode = useColorScheme() === 'dark';
-//   return (
-//     <View style={styles.sectionContainer}>
-//       <Text
-//         style={[
-//           styles.sectionTitle,
-//           {
-//             color: isDarkMode ? Colors.white : Colors.black,
-//           },
-//         ]}>
-//         {title}
-//       </Text>
-//       <Text
-//         style={[
-//           styles.sectionDescription,
-//           {
-//             color: isDarkMode ? Colors.light : Colors.dark,
-//           },
-//         ]}>
-//         {children}
-//       </Text>
-//     </View>
-//   );
-// }
+import {useTheme, withTheme} from 'react-native-paper';
+import NoAuthScreen from './auth/NoAuthScreen';
+import StartToDo from './todo/StartToDo';
 
 function App(): JSX.Element {
+  const theme = useTheme();
   const [hasAuth, setHasAuth] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
 
@@ -84,101 +37,48 @@ function App(): JSX.Element {
     setIsAuth(result.success);
   };
 
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const noAuth = () => {
-    return (
-      <SafeAreaView>
-        <Text>Please set up local authentication in your phone settings</Text>
-        <TouchableOpacity
-          onPress={() =>
-            Platform.OS === 'ios'
-              ? Linking.openURL('App-Prefs:Settings')
-              : Linking.sendIntent('android.settings.SECURITY_SETTINGS')
-          }>
-          <Text>Go to Settings</Text>
-        </TouchableOpacity>
-        {/* Need this to recheck if user has changed settings while on app */}
-        <TouchableOpacity
-          onPress={() => {
-            hasLocalAuth();
-            hasAuth ? authenticate() : <></>;
-          }}>
-          <Text>Recheck Auth</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
-    );
-  };
-
   // if no local auth, send user to setup one in phone settings
   if (!hasAuth) {
-    return noAuth();
+    return (
+      <NoAuthScreen
+        authenticate={authenticate}
+        hasLocalAuth={hasLocalAuth}
+        hasAuth={hasAuth}
+      />
+    );
   }
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      {/* <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      /> */}
-      {/* <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView> */}
-      {isAuth ? (
-        <MainList />
-      ) : hasAuth ? (
-        <TouchableOpacity onPress={authenticate}>
-          <Text>Start To-Do-ing</Text>
-        </TouchableOpacity>
-      ) : (
-        noAuth()
-      )}
-    </SafeAreaView>
+    <>
+      <SafeAreaView
+        style={[styles.statusBar, {backgroundColor: theme.colors.background}]}
+      />
+      <SafeAreaView
+        style={[styles.container, {backgroundColor: theme.colors.background}]}>
+        {isAuth ? (
+          <MainList />
+        ) : //  need to recheck auth in case user decides to remove local auth while using app
+        hasAuth ? (
+          <StartToDo authenticate={authenticate} />
+        ) : (
+          <NoAuthScreen
+            authenticate={authenticate}
+            hasLocalAuth={hasLocalAuth}
+            hasAuth={hasAuth}
+          />
+        )}
+      </SafeAreaView>
+    </>
   );
 }
 
-// const styles = StyleSheet.create({
-//   sectionContainer: {
-//     marginTop: 32,
-//     paddingHorizontal: 24,
-//   },
-//   sectionTitle: {
-//     fontSize: 24,
-//     fontWeight: '600',
-//   },
-//   sectionDescription: {
-//     marginTop: 8,
-//     fontSize: 18,
-//     fontWeight: '400',
-//   },
-//   highlight: {
-//     fontWeight: '700',
-//   },
-// });
+const styles = StyleSheet.create({
+  statusBar: {
+    flex: 0,
+  },
+  container: {
+    flex: 1,
+  },
+});
 
-export default App;
+export default withTheme(App);

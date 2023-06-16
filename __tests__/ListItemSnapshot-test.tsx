@@ -9,8 +9,9 @@ it('renders a ListItem using Snapshots', () => {
   expect(
     renderer.create(
       <ListItem
+        testId={'todo-item-0'}
         id={'1234'}
-        value={'A to-do'}
+        value={'todo'}
         completed={false}
         updateListItem={jest.fn}
         toggleComplete={jest.fn}

@@ -9,6 +9,7 @@ exports[`renders a SubList using Snapshots 1`] = `
       "width": "100%",
     }
   }
+  testID="sub-list"
 >
   <View>
     <View>
@@ -384,7 +385,7 @@ exports[`renders a SubList using Snapshots 1`] = `
               "width": "8%",
             }
           }
-          testID="delete-icon-container-outer-layer"
+          testID="delete-icon-Download this app-container-outer-layer"
         >
           <View
             collapsable={false}
@@ -406,7 +407,7 @@ exports[`renders a SubList using Snapshots 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="delete-icon-container"
+            testID="delete-icon-Download this app-container"
           >
             <View
               accessibilityComponentType="button"
@@ -467,7 +468,7 @@ exports[`renders a SubList using Snapshots 1`] = `
                   ],
                 ]
               }
-              testID="delete-icon"
+              testID="delete-icon-Download this app"
             >
               <Text
                 accessibilityElementsHidden={true}
@@ -883,7 +884,7 @@ exports[`renders a SubList using Snapshots 1`] = `
               "width": "8%",
             }
           }
-          testID="delete-icon-container-outer-layer"
+          testID="delete-icon-Add a to-do item-container-outer-layer"
         >
           <View
             collapsable={false}
@@ -905,7 +906,7 @@ exports[`renders a SubList using Snapshots 1`] = `
                 "shadowRadius": 0,
               }
             }
-            testID="delete-icon-container"
+            testID="delete-icon-Add a to-do item-container"
           >
             <View
               accessibilityComponentType="button"
@@ -966,7 +967,7 @@ exports[`renders a SubList using Snapshots 1`] = `
                   ],
                 ]
               }
-              testID="delete-icon"
+              testID="delete-icon-Add a to-do item"
             >
               <Text
                 accessibilityElementsHidden={true}

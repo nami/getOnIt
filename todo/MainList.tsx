@@ -23,12 +23,6 @@ export enum ListStatus {
 const allListItems: IListItem[] = [
   {
     id: uuidv4(),
-    value: 'Download this app',
-    active: true,
-    completed: true,
-  },
-  {
-    id: uuidv4(),
     value: 'Add a to-do item',
     active: true,
     completed: false,
@@ -38,6 +32,12 @@ const allListItems: IListItem[] = [
     value: 'Complete a to-do item',
     active: true,
     completed: false,
+  },
+  {
+    id: uuidv4(),
+    value: 'Download this app',
+    active: true,
+    completed: true,
   },
   {
     id: uuidv4(),
@@ -53,7 +53,7 @@ const MainList = () => {
   const theme = useTheme();
   // List chosen by user
   const [chosenListStatus, setChosenListStatus] = useState<ListStatus>(
-    ListStatus.TODO
+    ListStatus.ALL
   );
   // Full list
   const [list, setList] = useState<IListItem[]>(allListItems);

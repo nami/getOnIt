@@ -17,7 +17,7 @@ const SubList = ({
   toggleComplete,
 }: ListProps) => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} testID={'sub-list'}>
       {list.map((item, index) => (
         <ListItem
           testId={`item-${index}`}

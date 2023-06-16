@@ -51,6 +51,7 @@ exports[`renders a ListItem using Snapshots 1`] = `
         ],
       ]
     }
+    testID="todo-item-0"
   >
     <View
       style={
@@ -104,7 +105,7 @@ exports[`renders a ListItem using Snapshots 1`] = `
             },
           ]
         }
-        testID="checkbox-undefined"
+        testID="checkbox-todo-item-0"
         uncheckedColor="rgba(103, 80, 164, 1)"
       >
         <View
@@ -193,9 +194,9 @@ exports[`renders a ListItem using Snapshots 1`] = `
               ],
             ]
           }
-          testID="val-A to-do"
+          testID="val-todo"
         >
-          A to-do
+          todo
         </Text>
       </View>
     </View>
@@ -231,7 +232,7 @@ exports[`renders a ListItem using Snapshots 1`] = `
           "width": "8%",
         }
       }
-      testID="nonedit-mode-icon-A to-do-container-outer-layer"
+      testID="nonedit-mode-icon-todo-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -253,7 +254,7 @@ exports[`renders a ListItem using Snapshots 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="nonedit-mode-icon-A to-do-container"
+        testID="nonedit-mode-icon-todo-container"
       >
         <View
           accessibilityComponentType="button"
@@ -314,7 +315,7 @@ exports[`renders a ListItem using Snapshots 1`] = `
               ],
             ]
           }
-          testID="nonedit-mode-icon-A to-do"
+          testID="nonedit-mode-icon-todo"
         >
           <Text
             accessibilityElementsHidden={true}
@@ -373,7 +374,7 @@ exports[`renders a ListItem using Snapshots 1`] = `
           "width": "8%",
         }
       }
-      testID="delete-icon-container-outer-layer"
+      testID="delete-icon-todo-container-outer-layer"
     >
       <View
         collapsable={false}
@@ -395,7 +396,7 @@ exports[`renders a ListItem using Snapshots 1`] = `
             "shadowRadius": 0,
           }
         }
-        testID="delete-icon-container"
+        testID="delete-icon-todo-container"
       >
         <View
           accessibilityComponentType="button"
@@ -456,7 +457,7 @@ exports[`renders a ListItem using Snapshots 1`] = `
               ],
             ]
           }
-          testID="delete-icon"
+          testID="delete-icon-todo"
         >
           <Text
             accessibilityElementsHidden={true}

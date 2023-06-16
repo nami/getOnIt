@@ -8,48 +8,66 @@ import {
   waitFor,
 } from '@testing-library/react-native';
 import MainList from '../todo/MainList';
+import {act} from 'react-test-renderer';
 
-test('can input & submit new list item', async () => {
+test('CRUD methods', async () => {
   const newTodo = 'todo';
   const updated = 'updated';
 
   const {queryByTestId} = render(<MainList />);
 
+  // CREATE
+  // find input
   const toDoInput = screen.getAllByPlaceholderText('Type here...');
-
+  // input text
   fireEvent.changeText(toDoInput[0], newTodo);
   fireEvent.press(screen.getByTestId('submit'));
-
+  // expect new list item
   expect(queryByTestId(`val-${newTodo}`)).toHaveTextContent(newTodo);
 
-  //   const item = screen.getByTestId(`item-0`);
-  //   expect(screen.getByTestId(`checkbox-item-0`)).toHaveAccessibilityState({
-  //     checked: false,
-  //   });
-  //   await waitFor(() => {
-  //     expect(item).toBeTruthy();
-  //     expect(checkBox).toBeTruthy();
-  //   });
-  //   expect(checkBox).toHaveAccessibilityState({
-  //     checked: false,
-  //   });
-  //   fireEvent.press(screen.getByTestId(`item-0`));
-  //   expect(screen.getByTestId(`checkbox-item-0`)).toHaveAccessibilityState({
-  //     checked: true,
-  //   });
-  //   expect(queryByTestId(`checkbox-item-0`)).toHaveAccessibilityState({
-  //     checked: true,
-  //   });
+  // COMPLETE A LIST ITEM
+  const item = screen.getByTestId(`item-0`);
+  const checkbox = screen.getByTestId(`checkbox-item-0`);
+  // checkbox should be false
+  expect(checkbox).toHaveAccessibilityState({
+    checked: false,
+  });
+  // toggle checkbox to true
+  fireEvent.press(item);
+  expect(checkbox).toHaveAccessibilityState({
+    checked: true,
+  });
+  // check that checkbox is true
+  expect(queryByTestId(`checkbox-item-0`)).toHaveAccessibilityState({
+    checked: true,
+  });
 
-  // edit item
+  // UPDATE
+  // find item edit button
   const editButton = screen.getByTestId('nonedit-mode-icon-todo');
   fireEvent.press(editButton);
+  // change text
   const editInput = screen.getByTestId('edit-input');
   await waitFor(() => {
+    // wait for edit input to be toggled
     expect(editInput).toBeTruthy();
   });
+  act(() => {
+    fireEvent.changeText(editInput, updated);
+  });
   const submitButton = screen.getByTestId('edit-mode-icon-todo');
-  fireEvent.changeText(editInput, updated);
-  fireEvent.press(submitButton);
+  act(() => {
+    fireEvent.press(submitButton);
+  });
+  // check if list item has been changed
   expect(queryByTestId(`val-${updated}`)).toHaveTextContent(updated);
+
+  // DELETE
+  const deleteButton = screen.getByTestId(`delete-icon-${updated}`);
+  act(() => {
+    fireEvent.press(deleteButton);
+  });
+  expect(queryByTestId('sub-list')).not.toContainElement(
+    queryByTestId(`val-${updated}`)
+  );
 });

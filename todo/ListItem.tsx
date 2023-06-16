@@ -109,7 +109,7 @@ const ListItem = ({
           />
         )}
         <IconButton
-          testID="delete-icon"
+          testID={`delete-icon-${value}`}
           icon="delete"
           iconColor={theme.colors.primary}
           onPress={() => {

@@ -38,6 +38,7 @@ const NewToDoInput = ({addListItem}: inputProps) => {
               text ? addItem(text) : setShowWarning(true);
               setText('');
             }}
+            testID="submit"
           />
         </View>
       </View>

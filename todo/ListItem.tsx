@@ -12,6 +12,7 @@ import {fonts} from '../theme';
 
 type ListItemProps = {
   id: string;
+  testId: string;
   value: string;
   completed: boolean;
   updateListItem: (listItemId: string, newValue: string) => void;
@@ -26,6 +27,7 @@ const ListItem = ({
   renderListItemInactive,
   toggleComplete,
   updateListItem,
+  testId,
 }: ListItemProps) => {
   const theme = useTheme();
   const [updateMode, setUpdateMode] = useState(false);
@@ -35,9 +37,11 @@ const ListItem = ({
   const checkbox = () => {
     return (
       <>
-        <Checkbox.Android
+        <Checkbox
+          testID={`checkbox-${testId}`}
           status={completed ? 'checked' : 'unchecked'}
           uncheckedColor={theme.colors.primary}
+          onPress={() => toggleComplete(id)}
         />
       </>
     );
@@ -47,13 +51,16 @@ const ListItem = ({
   const updateText = () => {
     return updateMode ? (
       <TextInput
+        testID={'edit-input'}
         placeholder={value}
+        value={newText ? newText : value}
         onChangeText={text => setNewText(text)}
         style={styles.textInput}
         underlineColor={theme.colors.primary}
       />
     ) : (
       <Text
+        testID={`val-${value}`}
         style={[fonts.medium, {color: theme.colors.tertiary}]}
         variant="bodyLarge">
         {value}
@@ -76,6 +83,7 @@ const ListItem = ({
         )}
         {updateMode ? (
           <IconButton
+            testID={`edit-mode-icon-${value}`}
             icon="pencil-circle-outline"
             iconColor={theme.colors.primary}
             onPress={() => {
@@ -92,6 +100,7 @@ const ListItem = ({
           />
         ) : (
           <IconButton
+            testID={`nonedit-mode-icon-${value}`}
             iconColor={theme.colors.primary}
             icon="pencil-circle"
             onPress={() => setUpdateMode(true)}
@@ -100,6 +109,7 @@ const ListItem = ({
           />
         )}
         <IconButton
+          testID="delete-icon"
           icon="delete"
           iconColor={theme.colors.primary}
           onPress={() => {
@@ -115,11 +125,14 @@ const ListItem = ({
   return (
     <View>
       <List.Item
+        testID={testId}
         id={id}
         title={updateText}
         style={styles.listItem}
         left={checkbox}
-        onPress={() => toggleComplete(id)}
+        onPress={() => {
+          toggleComplete(id);
+        }}
       />
       {editDelete()}
     </View>

@@ -18,8 +18,9 @@ const SubList = ({
 }: ListProps) => {
   return (
     <ScrollView style={styles.container}>
-      {list.map(item => (
+      {list.map((item, index) => (
         <ListItem
+          testId={`item-${index}`}
           key={item.id}
           id={item.id}
           value={item.value}

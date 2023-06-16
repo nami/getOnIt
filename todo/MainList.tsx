@@ -135,12 +135,15 @@ const MainList = () => {
 
   // Toggle complete state of list item
   const toggleComplete = (listItemId: string) => {
+    console.log('lego');
     const newActiveList = [...(activeList as IListItem[])];
     const listItemToToggle = newActiveList?.find(
       listItem => listItem.id === listItemId
     );
     if (listItemToToggle) {
+      console.log('sean', listItemToToggle.completed);
       listItemToToggle.completed = !listItemToToggle.completed;
+      console.log('sean after', listItemToToggle.completed);
     }
     setActiveList(newActiveList);
   };

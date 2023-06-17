@@ -61,6 +61,7 @@ const MainList = () => {
   const [activeList, setActiveList] = useState<IListItem[] | undefined>(
     undefined
   );
+  // list that is filtered based on user's chosen list status
   const [chosenList, setChosenList] = useState<IListItem[] | undefined>(
     activeList
   );
@@ -160,6 +161,7 @@ const MainList = () => {
     backgroundColor: 'white',
   };
 
+  // styling array for List Status buttons
   const segmentedButtonsArray = [
     {
       value: ListStatus.ALL,

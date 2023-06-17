@@ -25,7 +25,7 @@ function App(): JSX.Element {
     setHasAuth(!!securityLevel);
   };
 
-  // check is local auth exists on app load or if user has lost auth
+  // check is local auth exists on app load or if user has disabled auth while using app
   useEffect(() => {
     hasLocalAuth();
   }, [isAuth]);
@@ -37,7 +37,7 @@ function App(): JSX.Element {
     setIsAuth(result.success);
   };
 
-  // if no local auth, send user to setup one in phone settings
+  // if no local auth, send user to set up one in phone settings
   if (!hasAuth) {
     return (
       <NoAuthScreen
@@ -50,6 +50,7 @@ function App(): JSX.Element {
 
   return (
     <>
+      {/* styling status bar at the top of phone */}
       <SafeAreaView
         style={[styles.statusBar, {backgroundColor: theme.colors.background}]}
       />

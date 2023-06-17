@@ -53,7 +53,6 @@ const ListItem = ({
       <TextInput
         testID={'edit-input'}
         placeholder={value}
-        value={newText ? newText : value}
         onChangeText={text => setNewText(text)}
         style={styles.textInput}
         underlineColor={theme.colors.primary}

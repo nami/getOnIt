@@ -127,11 +127,12 @@ iOS                                                                             
 ## Setup
 
 1. Clone the repo 
-(Ensure you have the React-Native, Android Studio & XCode set up)
-2. ```npx react-native start```
-3. For iOS: ```npx react-native run-ios```
-4. For Android: ```npx react-native run-android```
-5. Ta-da!                                           
+(Ensure you have the React-Native, Android Studio & XCode set up. Instructions [here](https://reactnative.dev/docs/environment-setup)
+2. Run ```npm install```
+3. Run ```npx react-native start```
+4. For iOS: On a seperate terminal, run ```npx react-native run-ios```
+5. For Android: On a seperate terminal, run ```npx react-native run-android```
+6. Ta-da!                                           
 
 ## Points to improve on
 
